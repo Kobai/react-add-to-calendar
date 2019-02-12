@@ -7,8 +7,8 @@ export default class helpers {
   }
 
   formatTime(date) {
-    let formattedDate = moment.utc(date).format("YYYYMMDDTHHmmssZ");
-    return formattedDate.replace("+00:00", "Z");
+    let formattedDate = moment.utc(date).format("YYYYMMDD");
+    return formattedDate;
   }
 
   calculateDuration(startTime, endTime) {
