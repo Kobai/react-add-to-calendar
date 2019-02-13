@@ -54,7 +54,7 @@ export default class helpers {
 
       case "yahoo":
         // yahoo doesn't utilize endTime so we need to calulate duration
-        let formattedDescription = event.description.replace(/^[\s\t]+/,'')
+        let formattedDescription = event.description.replace(/^\s+/,'')
         calendarUrl = "https://calendar.yahoo.com/?v=60&view=d&type=20";
         calendarUrl += "&title=" + encodeURIComponent(event.title);
         calendarUrl += "&st=" + this.formatStartTime(event.startTime);
