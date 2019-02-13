@@ -18805,8 +18805,8 @@
 	  }, {
 	    key: "formatTime",
 	    value: function formatTime(date) {
-	      var formattedDate = _moment2.default.utc(date).format("YYYYMMDDTHHmmssZ");
-	      return formattedDate.replace("+00:00", "Z");
+	      var formattedDate = _moment2.default.utc(date).format("YYYYMMDD");
+	      return formattedDate;
 	    }
 	  }, {
 	    key: "calculateDuration",
