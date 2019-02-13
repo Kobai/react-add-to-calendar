@@ -76,7 +76,7 @@ export default class helpers {
         break;
 
       default:
-        let formattedDescription = event.description.replace(/^[\t\s]+/gm, '').replace(/\n/gm, '\\n')
+        let formattedDescription = event.description.replace(/\n/gm, '\\n').replace(/(\\n)[\s\t]/gm, "\\n")
         calendarUrl = [
           "BEGIN:VCALENDAR",
           "VERSION:2.0",
