@@ -84,7 +84,7 @@ export default class helpers {
           "DTSTART:" + this.formatStartTime(event.startTime),
           "DTEND:" + this.formatEndTime(event.endTime),
           "SUMMARY:" + event.title,
-          "DESCRIPTION:" + event.description,
+          "DESCRIPTION;ENCODING=QUOTED-PRINTABLE:" + event.description,
           "LOCATION:" + event.location,
           "END:VEVENT",
           "END:VCALENDAR"
