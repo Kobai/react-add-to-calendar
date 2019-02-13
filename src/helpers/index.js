@@ -7,7 +7,7 @@ export default class helpers {
   }
 
   formatTime(date) {
-    let formattedDate = moment.utc(date).format("YYYYMMDD");
+    let formattedDate = moment.utc(date).add(1,'d').format("YYYYMMDD");
     return formattedDate;
   }
 

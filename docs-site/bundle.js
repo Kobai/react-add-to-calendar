@@ -18805,7 +18805,7 @@
 	  }, {
 	    key: "formatTime",
 	    value: function formatTime(date) {
-	      var formattedDate = _moment2.default.utc(date).format("YYYYMMDD");
+	      var formattedDate = _moment2.default.utc(date).add(1, 'd').format("YYYYMMDD");
 	      return formattedDate;
 	    }
 	  }, {
