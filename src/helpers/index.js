@@ -54,14 +54,14 @@ export default class helpers {
 
       case "yahoo":
         // yahoo doesn't utilize endTime so we need to calulate duration
-        let duration = this.calculateDuration(event.startTime, event.endTime);
+        let formattedDescription  = event.description.replace(/^[\s\t]+/,'')
         calendarUrl = "https://calendar.yahoo.com/?v=60&view=d&type=20";
         calendarUrl += "&title=" + encodeURIComponent(event.title);
         calendarUrl += "&st=" + this.formatStartTime(event.startTime);
-        // calendarUrl += "&dur=" + duration;
+        calendarUrl += "&dur=allday";
         // use of StartTime is intentional because yahoo does not handle endTimes like the others
         calendarUrl += "&et=" + this.formatStartTime(event.endTime); 
-        calendarUrl += "&desc=" + encodeURIComponent(event.description);
+        calendarUrl += "&desc=" + encodeURIComponent(formattedDescription);
         calendarUrl += "&in_loc=" + encodeURIComponent(event.location);
         break;
 
