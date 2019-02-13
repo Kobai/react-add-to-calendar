@@ -637,7 +637,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	          calendarUrl = "https://calendar.yahoo.com/?v=60&view=d&type=20";
 	          calendarUrl += "&title=" + encodeURIComponent(event.title);
 	          calendarUrl += "&st=" + this.formatStartTime(event.startTime);
-	          calendarUrl += "&dur=" + duration;
+	          // calendarUrl += "&dur=" + duration;
+	          // use of StartTime is intentional because yahoo does not handle endTimes like the others
+	          calendarUrl += "&et=" + this.formatStartTime(event.endTime);
 	          calendarUrl += "&desc=" + encodeURIComponent(event.description);
 	          calendarUrl += "&in_loc=" + encodeURIComponent(event.location);
 	          break;
