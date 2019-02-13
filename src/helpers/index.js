@@ -54,11 +54,12 @@ export default class helpers {
 
       case "yahoo":
         // yahoo doesn't utilize endTime so we need to calulate duration
+        let duration = this.calculateDuration(event.startTime, event.endTime);
         let formattedDescription = event.description.replace(/^\s+/,'')
         calendarUrl = "https://calendar.yahoo.com/?v=60&view=d&type=20";
         calendarUrl += "&title=" + encodeURIComponent(event.title);
         calendarUrl += "&st=" + this.formatStartTime(event.startTime);
-        calendarUrl += "&et=" + this.formatEndTime(event.endTime);
+        calendarUrl += "&duration=" + duration
         calendarUrl += "&desc=" + encodeURIComponent(formattedDescription);
         calendarUrl += "&in_loc=" + encodeURIComponent(event.location);
         break;
@@ -76,7 +77,7 @@ export default class helpers {
         break;
 
       default:
-        let formattedDescription = event.description.replace(/\n/gm, '\\n').replace(/(\\n)[\s\t]+/gm, '\\n')
+        let formattedDescription = event.description.replace(/\n/gm, '\\n').replace(/(\\n)[\s\t]+/gm, "\\n")
         calendarUrl = [
           "BEGIN:VCALENDAR",
           "VERSION:2.0",
