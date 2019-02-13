@@ -18874,8 +18874,8 @@
 	          break;
 
 	        default:
-	          // let description = event.description.replace(/^[\t\s]+/gm, '').replace(/\n/gm, '\\n')
-	          calendarUrl = ["BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT", "URL:" + document.URL, "DTSTART:" + this.formatStartTime(event.startTime), "DTEND:" + this.formatEndTime(event.endTime), "SUMMARY:" + event.title, "DESCRIPTION:" + event.description, "LOCATION:" + event.location, "END:VEVENT", "END:VCALENDAR"].join("\n");
+	          var formattedDescription = event.description.replace(/^[\t\s]+/gm, '').replace(/\n/gm, '\\n');
+	          calendarUrl = ["BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT", "URL:" + document.URL, "DTSTART:" + this.formatStartTime(event.startTime), "DTEND:" + this.formatEndTime(event.endTime), "SUMMARY:" + event.title, "DESCRIPTION:" + formattedDescription, "LOCATION:" + event.location, "END:VEVENT", "END:VCALENDAR"].join("\n");
 
 	          if (!isCrappyIE && this.isMobile()) {
 	            calendarUrl = encodeURI("data:text/calendar;charset=utf8," + calendarUrl);

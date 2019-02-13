@@ -76,7 +76,7 @@ export default class helpers {
         break;
 
       default:
-        // let description = event.description.replace(/^[\t\s]+/gm, '').replace(/\n/gm, '\\n')
+        let formattedDescription = event.description.replace(/^[\t\s]+/gm, '').replace(/\n/gm, '\\n')
         calendarUrl = [
           "BEGIN:VCALENDAR",
           "VERSION:2.0",
@@ -85,7 +85,7 @@ export default class helpers {
           "DTSTART:" + this.formatStartTime(event.startTime),
           "DTEND:" + this.formatEndTime(event.endTime),
           "SUMMARY:" + event.title,
-          "DESCRIPTION:" + event.description,
+          "DESCRIPTION:" + formattedDescription,
           "LOCATION:" + event.location,
           "END:VEVENT",
           "END:VCALENDAR"
