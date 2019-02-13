@@ -18517,6 +18517,7 @@
 	  event: _propTypes2.default.shape({
 	    title: _propTypes2.default.string,
 	    description: _propTypes2.default.string,
+	    googleDescription: _propTypes2.default.string,
 	    location: _propTypes2.default.string,
 	    startTime: _propTypes2.default.string,
 	    endTime: _propTypes2.default.string
@@ -18839,13 +18840,14 @@
 
 	      switch (type) {
 	        case "google":
+	          var description = event.googleDescription ? event.googleDescription : event.description;
 	          calendarUrl = "https://calendar.google.com/calendar/render";
 	          calendarUrl += "?action=TEMPLATE";
 	          calendarUrl += "&dates=" + this.formatStartTime(event.startTime);
 	          calendarUrl += "/" + this.formatEndTime(event.endTime);
 	          calendarUrl += "&location=" + encodeURIComponent(event.location);
 	          calendarUrl += "&text=" + encodeURIComponent(event.title);
-	          calendarUrl += "&details=" + encodeURIComponent(event.description);
+	          calendarUrl += "&details=" + encodeURIComponent(description);
 	          break;
 
 	        case "yahoo":
