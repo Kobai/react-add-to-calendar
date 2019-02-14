@@ -36,6 +36,7 @@ export default class helpers {
 
   buildUrl(event, type, isCrappyIE) {
     let calendarUrl = "";
+    let formattedDescription = ""
 
     // allow mobile browsers to open the gmail data URI within native calendar app
     // type = (type == "google" && this.isMobile()) ? "outlook" : type;
@@ -54,14 +55,14 @@ export default class helpers {
 
       case "yahoo":
         // yahoo doesn't utilize endTime so we need to calulate duration
-        let formattedDescription = event.description.replace(/^[\s\t]+/gm, '')
+        formattedDescription = event.description.replace(/^[\s\t]+/gm, '')
         calendarUrl = "https://calendar.yahoo.com/?v=60&view=d&type=20";
         calendarUrl += "&title=" + encodeURIComponent(event.title);
         calendarUrl += "&st=" + this.formatStartTime(event.startTime);
         calendarUrl += "&dur=allday";
         // use of StartTime is intentional because yahoo does not handle endTimes like the others
         calendarUrl += "&et=" + this.formatStartTime(event.endTime); 
-        calendarUrl += "&desc=" + encodeURIComponent(event.description);
+        calendarUrl += "&desc=" + encodeURIComponent(formattedDescription);
         calendarUrl += "&in_loc=" + encodeURIComponent(event.location);
         break;
 
@@ -78,7 +79,7 @@ export default class helpers {
         break;
 
       default:
-        let formattedDescription = event.description.replace(/\n/gm, '\\n').replace(/(\\n)[\s\t]+/gm, "\\n")
+        formattedDescription = event.description.replace(/\n/gm, '\\n').replace(/(\\n)[\s\t]+/gm, "\\n")
         calendarUrl = [
           "BEGIN:VCALENDAR",
           "VERSION:2.0",
@@ -98,6 +99,7 @@ export default class helpers {
             "data:text/calendar;charset=utf8," + calendarUrl
           );
         }
+        break;
     }
 
     return calendarUrl;
