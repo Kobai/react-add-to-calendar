@@ -61,7 +61,7 @@ export default class helpers {
         calendarUrl += "&dur=allday";
         // use of StartTime is intentional because yahoo does not handle endTimes like the others
         calendarUrl += "&et=" + this.formatStartTime(event.endTime); 
-        calendarUrl += "&desc=" + encodeURIComponent(formattedDescription);
+        calendarUrl += "&desc=" + encodeURIComponent(event.description);
         calendarUrl += "&in_loc=" + encodeURIComponent(event.location);
         break;
 
