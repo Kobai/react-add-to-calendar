@@ -6,12 +6,16 @@ export default class helpers {
     return new Date().getTime().toString() + "_" + n;
   }
 
-  formatStartTime(date) {
+  formatStartDate(date) {
+    // To deal with dates changing as a result of timezone
+    //   formattedDate should be date and not a datetime
     let formattedDate = moment.utc(date).format("YYYYMMDD");
     return formattedDate;
   }
 
-  formatEndTime(date) {
+  formatEndDate(date) {
+    // Extra day is added because an event from 20180101-20190102 
+    //   is considered a single all day event for Jan 1 as a opposed to event that's 2 days
     let formattedDate = moment.utc(date).add(1,'d').format("YYYYMMDD");
     return formattedDate;
   }
@@ -36,40 +40,42 @@ export default class helpers {
 
   buildUrl(event, type, isCrappyIE) {
     let calendarUrl = "";
-    let formattedDescription = ""
-
+    let formattedDescription = "";
     // allow mobile browsers to open the gmail data URI within native calendar app
     // type = (type == "google" && this.isMobile()) ? "outlook" : type;
 
     switch (type) {
       case "google":
-        let description = event.googleDescription ? event.googleDescription : event.description
+        // gcal events allow for text bolding so made a special description for google
+        formattedDescription = event.googleDescription ? event.googleDescription : event.description
         calendarUrl = "https://calendar.google.com/calendar/render";
         calendarUrl += "?action=TEMPLATE";
-        calendarUrl += "&dates=" + this.formatStartTime(event.startTime);
-        calendarUrl += "/" + this.formatEndTime(event.endTime);
+        calendarUrl += "&dates=" + this.formatStartDate(event.startTime);
+        calendarUrl += "/" + this.formatEndDate(event.endTime);
         calendarUrl += "&location=" + encodeURIComponent(event.location);
         calendarUrl += "&text=" + encodeURIComponent(event.title);
-        calendarUrl += "&details=" + encodeURIComponent(description);
+        calendarUrl += "&details=" + encodeURIComponent(formattedDescription);
         break;
 
       case "yahoo":
-        // yahoo doesn't utilize endTime so we need to calulate duration
+        // yahoo's description adds leading whitespace
         formattedDescription = event.description.replace(/^[' '\t]+/gm, '')
+        let duration = this.calculateDuration(event.startTime, event.endTime);
         calendarUrl = "https://calendar.yahoo.com/?v=60&view=d&type=20";
         calendarUrl += "&title=" + encodeURIComponent(event.title);
-        calendarUrl += "&st=" + this.formatStartTime(event.startTime);
+        calendarUrl += "&st=" + this.formatStartDate(event.startTime);
         calendarUrl += "&dur=allday";
-        // use of StartTime is intentional because yahoo does not handle endTimes like the others
-        calendarUrl += "&et=" + this.formatStartTime(event.endTime); 
+        // formatStartDate is used intentionally because yahoo interprets an event
+        //   from 20180101-20180102 as a 2 day long event instead of 1 day like the others
+        calendarUrl += "&et=" + this.formatStartDate(event.endTime); 
         calendarUrl += "&desc=" + encodeURIComponent(formattedDescription);
         calendarUrl += "&in_loc=" + encodeURIComponent(event.location);
         break;
 
       case "outlookcom":
         calendarUrl = "https://outlook.live.com/owa/?rru=addevent";
-        calendarUrl += "&startdt=" + this.formatStartTime(event.startTime);
-        calendarUrl += "&enddt=" + this.formatEndTime(event.endTime);
+        calendarUrl += "&startdt=" + this.formatStartDate(event.startTime);
+        calendarUrl += "&enddt=" + this.formatEndDate(event.endTime);
         calendarUrl += "&subject=" + encodeURIComponent(event.title);
         calendarUrl += "&location=" + encodeURIComponent(event.location);
         calendarUrl += "&body=" + encodeURIComponent(event.description);
@@ -79,14 +85,17 @@ export default class helpers {
         break;
 
       default:
+        // For some reason, \n in the string would show up as a tab instead of a linebreak
+        //   Replacing \n with \\n allows the linebreaks to properly show up as a linebreak
+        // TODO Find a less hacky way to resolve this
         formattedDescription = event.description.replace(/\n/gm, '\\n').replace(/(\\n)[\s\t]+/gm, "\\n")
         calendarUrl = [
           "BEGIN:VCALENDAR",
           "VERSION:2.0",
           "BEGIN:VEVENT",
           "URL:" + document.URL,
-          "DTSTART:" + this.formatStartTime(event.startTime),
-          "DTEND:" + this.formatEndTime(event.endTime),
+          "DTSTART:" + this.formatStartDate(event.startTime),
+          "DTEND:" + this.formatEndDate(event.endTime),
           "SUMMARY:" + event.title,
           "DESCRIPTION:" + formattedDescription,
           "LOCATION:" + event.location,
@@ -99,7 +108,6 @@ export default class helpers {
             "data:text/calendar;charset=utf8," + calendarUrl
           );
         }
-        break;
     }
 
     return calendarUrl;

@@ -86,3 +86,16 @@ The examples are hosted within the docs folder and are ran in the simple add tha
 ## License
 
 Copyright (c) 2016-2017 Jason Salzman. Licensed under MIT license, see [LICENSE](LICENSE) for the full license.
+
+## After making changes to this repo
+```
+$ yarn run build -f
+```
+before commiting and pushing.
+
+The lib folder needs to be rebuilt before other repos can use it as a dependency
+
+## To use this repo as a dependency
+```
+$ yarn add https://github.com/Kobai/react-add-to-calendar.git#master
+```
