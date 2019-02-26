@@ -206,7 +206,6 @@ ReactAddToCalendar.propTypes = {
   displayItemIcons: PropTypes.bool,
   optionsOpen: PropTypes.bool,
   dropdownClass: PropTypes.string,
-  useDateTime: PropTypes.bool,
   event: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -222,7 +221,6 @@ ReactAddToCalendar.propTypes = {
 ReactAddToCalendar.defaultProps = {
   buttonClassClosed: "react-add-to-calendar__button",
   buttonClassOpen: "react-add-to-calendar__button--light",
-  useDateTime: false,
   buttonLabel: "Add to My Calendar",
   buttonTemplate: { caret: "right" },
   buttonIconClass: "react-add-to-calendar__icon--",
