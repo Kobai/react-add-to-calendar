@@ -632,7 +632,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          calendarUrl = "https://calendar.google.com/calendar/render";
 	          calendarUrl += "?action=TEMPLATE";
 	          calendarUrl += "&dates=" + this.formatStartDate(event.startTime);
-	          calendarUrl += "/" + this.formatEndDate(event.endTime);
+	          calendarUrl += "/" + (!useDateTime ? this.formatEndDate(event.endTime) : this.formatStartDate(event.endTime));
 	          calendarUrl += "&location=" + encodeURIComponent(event.location);
 	          calendarUrl += "&text=" + encodeURIComponent(event.title);
 	          calendarUrl += "&details=" + encodeURIComponent(formattedDescription);
