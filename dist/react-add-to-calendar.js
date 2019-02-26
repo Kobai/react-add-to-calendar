@@ -603,6 +603,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return formattedDate;
 	    }
 	  }, {
+	    key: "formatDateTime",
+	    value: function formatDateTime(datetime) {
+	      var formattedDateTime = _moment2.default.utc(datetime).format("YYYYMMDDTHHmmssZ");
+	      return formattedDateTime.replace("+00:00", "Z");
+	    }
+	  }, {
 	    key: "calculateDuration",
 	    value: function calculateDuration(startTime, endTime) {
 	      // snag parameters and format properly in UTC
@@ -631,8 +637,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          formattedDescription = event.googleDescription ? event.googleDescription : event.description;
 	          calendarUrl = "https://calendar.google.com/calendar/render";
 	          calendarUrl += "?action=TEMPLATE";
-	          calendarUrl += "&dates=" + this.formatStartDate(event.startTime);
-	          calendarUrl += "/" + (!useDateTime ? this.formatEndDate(event.endTime) : this.formatStartDate(event.endTime));
+	          calendarUrl += "&dates=" + (!useDateTime ? this.formatStartDate(event.startTime) : this.formatDateTime(event.startTime));
+	          calendarUrl += "/" + (!useDateTime ? this.formatEndDate(event.endTime) : this.formatDateTime(event.endTime));
 	          calendarUrl += "&location=" + encodeURIComponent(event.location);
 	          calendarUrl += "&text=" + encodeURIComponent(event.title);
 	          calendarUrl += "&details=" + encodeURIComponent(formattedDescription);
