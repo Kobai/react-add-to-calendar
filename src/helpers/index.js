@@ -69,22 +69,22 @@ export default class helpers {
         calendarUrl = "https://calendar.yahoo.com/?v=60&view=d&type=20";
         calendarUrl += "&title=" + encodeURIComponent(event.title);
         calendarUrl += "&st=" + this.formatStartDate(event.startTime);
-        calendarUrl += "&dur=allday";
+        calendarUrl += "&dur=" + (!useDateTime ? "allday" : duration);
         // formatStartDate is used intentionally because yahoo interprets an event
         //   from 20180101-20180102 as a 2 day long event instead of 1 day like the others
-        calendarUrl += "&et=" + this.formatStartDate(event.endTime); 
+        calendarUrl += "&et=" + (!useDateTime ? this.formatEndDate(event.endTime) : this.formatDateTime(event.endTime));
         calendarUrl += "&desc=" + encodeURIComponent(formattedDescription);
         calendarUrl += "&in_loc=" + encodeURIComponent(event.location);
         break;
 
       case "outlookcom":
         calendarUrl = "https://outlook.live.com/owa/?rru=addevent";
-        calendarUrl += "&startdt=" + this.formatStartDate(event.startTime);
-        calendarUrl += "&enddt=" + this.formatEndDate(event.endTime);
+        calendarUrl += "&startdt=" + (!useDateTime ? this.formatStartDate(event.startTime) : this.formatDateTime(event.startTime));
+        calendarUrl += "&enddt=" + (!useDateTime ? this.formatEndDate(event.endTime) : this.formatDateTime(event.endTime));
         calendarUrl += "&subject=" + encodeURIComponent(event.title);
         calendarUrl += "&location=" + encodeURIComponent(event.location);
         calendarUrl += "&body=" + encodeURIComponent(event.description);
-        calendarUrl += "&allday=false";
+        calendarUrl += "&allday="+ !useDateTime;
         calendarUrl += "&uid=" + this.getRandomKey();
         calendarUrl += "&path=/calendar/view/Month";
         break;
@@ -99,8 +99,8 @@ export default class helpers {
           "VERSION:2.0",
           "BEGIN:VEVENT",
           "URL:" + document.URL,
-          "DTSTART:" + this.formatStartDate(event.startTime),
-          "DTEND:" + this.formatEndDate(event.endTime),
+          "DTSTART:" + (!useDateTime ? this.formatStartDate(event.startTime) : this.formatDateTime(event.startTime)),
+          "DTEND:" + (!useDateTime ? this.formatEndDate(event.endTime) : this.formatDateTime(event.endTime)),
           "SUMMARY:" + event.title,
           "DESCRIPTION:" + formattedDescription,
           "LOCATION:" + event.location,
