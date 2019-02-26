@@ -289,6 +289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayItemIcons: _propTypes2.default.bool,
 	  optionsOpen: _propTypes2.default.bool,
 	  dropdownClass: _propTypes2.default.string,
+	  useDateTime: _propTypes2.default.bool,
 	  event: _propTypes2.default.shape({
 	    title: _propTypes2.default.string,
 	    description: _propTypes2.default.string,
@@ -312,6 +313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayItemIcons: true,
 	  optionsOpen: false,
 	  dropdownClass: "react-add-to-calendar__dropdown",
+	  useDateTime: false,
 	  event: {
 	    title: "Sample Event",
 	    description: "This is the sample event provided as an example only",

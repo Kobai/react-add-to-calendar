@@ -206,6 +206,7 @@ ReactAddToCalendar.propTypes = {
   displayItemIcons: PropTypes.bool,
   optionsOpen: PropTypes.bool,
   dropdownClass: PropTypes.string,
+  useDateTime: PropTypes.bool,
   event: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -229,6 +230,7 @@ ReactAddToCalendar.defaultProps = {
   displayItemIcons: true,
   optionsOpen: false,
   dropdownClass: "react-add-to-calendar__dropdown",
+  useDateTime: false,
   event: {
     title: "Sample Event",
     description: "This is the sample event provided as an example only",
