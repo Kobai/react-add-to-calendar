@@ -43,7 +43,7 @@ export default class helpers {
     );
   }
 
-  buildUrl(event, type, isCrappyIE, useDateTime) {
+  buildUrl(event, type, isCrappyIE) {
     let calendarUrl = "";
     let formattedDescription = "";
     // allow mobile browsers to open the gmail data URI within native calendar app

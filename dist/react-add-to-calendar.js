@@ -187,7 +187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            {
 	              className: currentItem + "-link",
 	              onClick: self.handleDropdownLinkClick,
-	              href: helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE, self.props.useDateTime),
+	              href: helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE),
 	              target: "_blank"
 	            },
 	            icon,
@@ -321,7 +321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    startTime: "2016-09-16T20:15:00-04:00",
 	    endTime: "2016-09-16T21:45:00-04:00"
 	  },
-	  listItems: [{ apple: "Apple Calendar" }, { google: "Google" }, { outlook: "Outlook" }, { yahoo: "Yahoo" }],
+	  listItems: [{ apple: "Apple Calendar" }, { google: "Google" }, { outlook: "Outlook" }, { outlookcom: "Outlook.com" }, { yahoo: "Yahoo" }],
 	  rootClass: "react-add-to-calendar"
 	};
 
@@ -625,7 +625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: "buildUrl",
-	    value: function buildUrl(event, type, isCrappyIE, useDateTime) {
+	    value: function buildUrl(event, type, isCrappyIE) {
 	      var calendarUrl = "";
 	      var formattedDescription = "";
 	      // allow mobile browsers to open the gmail data URI within native calendar app

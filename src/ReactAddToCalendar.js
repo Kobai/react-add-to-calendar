@@ -107,8 +107,7 @@ export default class ReactAddToCalendar extends React.Component {
             href={helpers.buildUrl(
               self.props.event,
               currentItem,
-              self.state.isCrappyIE,
-              self.props.useDateTime
+              self.state.isCrappyIE
             )}
             target="_blank"
           >
@@ -243,6 +242,7 @@ ReactAddToCalendar.defaultProps = {
     { apple: "Apple Calendar" },
     { google: "Google" },
     { outlook: "Outlook" },
+    { outlookcom: "Outlook.com" },
     { yahoo: "Yahoo" }
   ],
   rootClass: "react-add-to-calendar"
