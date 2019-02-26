@@ -107,7 +107,8 @@ export default class ReactAddToCalendar extends React.Component {
             href={helpers.buildUrl(
               self.props.event,
               currentItem,
-              self.state.isCrappyIE
+              self.state.isCrappyIE,
+              self.props.useDateTime
             )}
             target="_blank"
           >

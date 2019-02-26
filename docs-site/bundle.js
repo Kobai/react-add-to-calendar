@@ -18412,7 +18412,7 @@
 	            {
 	              className: currentItem + "-link",
 	              onClick: self.handleDropdownLinkClick,
-	              href: helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE),
+	              href: helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE, self.props.useDateTime),
 	              target: "_blank"
 	            },
 	            icon,
@@ -18838,7 +18838,7 @@
 	    }
 	  }, {
 	    key: "buildUrl",
-	    value: function buildUrl(event, type, isCrappyIE) {
+	    value: function buildUrl(event, type, isCrappyIE, useDateTime) {
 	      var calendarUrl = "";
 	      var formattedDescription = "";
 	      // allow mobile browsers to open the gmail data URI within native calendar app
